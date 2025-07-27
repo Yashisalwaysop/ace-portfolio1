@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ace-Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --bg: #111827;
+            --card-bg: #1e293b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        
+        
+        .hero-image {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hero-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-circle {
+            width: 120px;
+            height: 120px;
+            position: relative;
+        }
+        
+        .circle-bg {
+            fill: none;
+            stroke: #334155;
+            stroke-width: 10;
+        }
+        
+        .circle-progress {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 10;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            transition: stroke-dashoffset 1s ease-out;
+        }
+        
+        .card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: var(--card-bg);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: var(--primary-dark);
+        }
+        
+        /* Scroll animations */
+        [data-scroll] {
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        [data-scroll="fade-in"] {
+            transform: translateY(20px);
+        }
+        
+        [data-scroll="fade-left"] {
+            transform: translateX(-20px);
+        }
+        
+        [data-scroll="fade-right"] {
+            transform: translateX(20px);
+        }
+        
+        [data-scroll].is-visible {
+            opacity: 1;
+            transform: translate(0);
+        }
+    </style>
+</head>
+<body>
+    
+    
+    <header class="min-h-screen flex items-center py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div data-scroll="fade-right">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+                    Hi, I'm <span class="text-purple-500">Ace</span>.
+                    <br>A Minecraft Server Developer,
+                    <br>Staff Manager.
+                </h1>
+                <p class="text-lg text-gray-400 mb-8 max-w-lg">
+                    Specializing in plugin configuration and staff management to create exceptional Minecraft server experiences.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#contact" class="btn px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium">
+                        Hire Me
+                    </a>
+                    <a href="#work" class="btn px-6 py-3 border border-purple-600 text-purple-400 hover:bg-purple-900/30 rounded-lg font-medium">
+                        See My Work
+                    </a>
+                </div>
+            </div>
+            <div data-scroll="fade-left" class="flex justify-center">
+                <div class="hero-image w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-purple-500">
+                    <img src="https://i.pinimg.com/736x/29/58/05/295805386cf7fb8e8c1a95a7e7e6846b.jpg" alt="Professional Minecraft developer with purple aesthetic theme, wearing headphones while working on code" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center" data-scroll="fade-in">Skills & Expertise</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Plugin Configuration -->
+                <div class="card p-8 rounded-xl flex flex-col items-center" data-scroll="fade-in">
+                    <div class="skill-circle mb-6">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-progress" cx="60" cy="60" r="50" data-percent="89"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold">89%</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Plugin Configuration</h3>
+                    <p class="text-gray-400 text-center">
+                         specialize in advanced plugin configuration, tailoring each setup to enhance server performance, gameplay, and player experience..
+                    </p>
+                </div>
+                
+                <!-- Web Development -->
+                <div class="card p-8 rounded-xl flex flex-col items-center" data-scroll="fade-in" data-scroll-delay="200">
+                    <div class="skill-circle mb-6">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-progress" cx="60" cy="60" r="50" data-percent="78"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold">75%</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Front-end Web Devlopment [HTML,CSS]</h3>
+                    <p class="text-gray-400 text-center">
+                        Creating custom plugins and optimizing server performance for smooth gameplay.
+                    </p>
+                </div>
+                
+                <!-- Staff Management -->
+                <div class="card p-8 rounded-xl flex flex-col items-center" data-scroll="fade-in" data-scroll-delay="400">
+                    <div class="skill-circle mb-6">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="circle-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="circle-progress" cx="60" cy="60" r="50" data-percent="90"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold" style=" outline-offset: 1px;">90%</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Staff Management</h3>
+                    <p class="text-gray-400 text-center">
+                        Expert in staff management with a focus on building efficient teams, enforcing rules, and maintaining a positive server environment.
+                    </p>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="plugins" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center text-white" data-scroll="fade-in">My Plugin Library</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Plugin 1 -->
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">EssentialsX</h3>
+                    <p class="text-gray-300">EssentialsX is the essential plugin suite for Minecraft servers, with over 130 commands for servers of all size and scale.</p>
+                </div>
+
+                <!-- Plugin 2 -->
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="200">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">WorldEdit</h3>
+                    <p class="text-gray-300">Used WorldEdit for efficient terrain shaping, large-scale builds, and fast structure modifications to speed up server development</p>
+                </div>
+
+                <!-- Plugin 3 -->
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="400">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">WorldGuard</h3>
+                    <p class="text-gray-300">Implemented WorldGuard to protect key server regions, manage PvP zones, and control player interactions with precise flag settings.</p>
+                </div>
+
+                <!-- Plugin 4-20 -->
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="500">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Vault</h3>
+                    <p class="text-gray-300">Integrated Vault as a bridge between economy and permissions plugins, ensuring smooth plugin compatibility.</p>
+                </div>
+                
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="600">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">BetterRTP</h3>
+                    <p class="text-gray-300">Configured BetterRTP to allow safe and balanced random teleportation, improving exploration while preventing teleports into danger zones</p>
+                </div>
+                
+                <!-- Additional plugin tiles (6-18) -->
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">LuckPerms</h3>
+                    <p class="text-gray-300">Configured advanced permission systems using LuckPerms to manage ranks, staff roles, and player permissions efficiently.</p>
+                </div>
+                
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Valcun-Anticheat</h3>
+                    <p class="text-gray-300">Integrated Vulcan AntiCheat to detect and block common hacks like KillAura, Speed, and Fly, ensuring fair and competitive gameplay</p>
+                </div>
+
+                
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">EconomyShopGUI</h3>
+                    <p class="text-gray-300">Configured EconomyShopGUI to create a user-friendly in-game shop with categorized items, pricing, and smooth Vault integration for a balanced economy.</p>
+                </div>
+                 
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Virtual Spawners</h3>
+                    <p class="text-gray-300">Set up Virtual Spawner to allow players to manage and upgrade mob spawners through a sleek GUI, enhancing performance and reducing lag from physical spawners</p>
+                </div>
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Deluxe Combat</h3>
+                    <p class="text-gray-300">A highly customizable PvP plugin that adds advanced combat mechanics, stats tracking, and kill effects to enhance player battles.</p>
+                </div>
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">bStats</h3>
+                    <p class="text-gray-300">A lightweight metrics system that tracks plugin usage anonymously, helping developers improve performance and features.</p>
+                </div>
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">Citizens</h3>
+                    <p class="text-gray-300">A powerful NPC plugin that lets you create interactive and customizable non-player characters for quests, shops, and server immersion.</p>
+                </div>
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">ExcellentCrates</h3>
+                    <p class="text-gray-300">A modern and fully customizable crates plugin that allows players to unlock rewards with animations, keys, and GUI-based crates.</p>
+                </div>
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">TAB</h3>
+                    <p class="text-gray-300">A feature-rich plugin that customizes the tablist, name tags, and scoreboards with animations, placeholders, and server-wide visuals.</p>
+                </div>
+                <div class="card p-8 rounded-xl border-l-4 border-purple-500" data-scroll="fade-up" data-scroll-delay="700">
+                    <div class="text-purple-400 text-2xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold mb-2 text-white">GeyserMC</h3>
+                    <p class="text-gray-300">A proxy plugin that allows Bedrock Edition players to join Java Edition servers without any client modifications.</p>
+                </div>
+
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-16 text-center" data-scroll="fade-in">Recent Work</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8 rounded-xl" data-scroll="fade-right">
+                    <h3 class="text-2xl font-bold mb-4">Fire Mc</h3>
+                    <p class="text-gray-400 mb-6">
+                        Fire MC is a dynamic Minecraft server offering thrilling gameplay, custom features, and a vibrant community.
+                    </p>
+                    
+                </div>
+                
+                <div class="card p-8 rounded-xl" data-scroll="fade-left">
+                    <h3 class="text-2xl font-bold mb-4">WatNetwork</h3>
+                    <p class="text-gray-400 mb-6">
+                        Contributed to WarNetwork, a competitive Indian Lifesteal Minecraft server known for its intense PvP mechanics and thriving player community.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-md mx-auto text-center" data-scroll="fade-in">
+            <h2 class="text-3xl font-bold mb-6">Available for Hire</h2>
+            <p class="text-gray-400 mb-8 max-w-md mx-auto">
+                Ready to take your Minecraft server, You can rech me through discord.
+            </p>
+            <a href="https://www.discordapp.com/users/917785176065576990" class="btn px-8 py-4 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium text-lg">
+                Hire Me
+            </a>
+        </div>
+    </section>
+    
+    <footer class="py-12 px-4 bg-gray-950">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-500">&copy; 2025 Ace Minecraft Development. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        //  scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('[data-scroll]').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Animate skill circles
+            const circles = document.querySelectorAll('.circle-progress');
+            circles.forEach(circle => {
+                const percent = circle.getAttribute('data-percent');
+                const circumference = 2 * Math.PI * 50;
+                const offset = circumference - (percent / 100) * circumference;
+                circle.style.strokeDashoffset = offset;
+            });
+        });
+    </script>
+</body>
+</html>
