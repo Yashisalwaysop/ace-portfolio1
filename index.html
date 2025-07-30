@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
     <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
     <style>
         :root {
             --primary: #8b5cf6;
@@ -17,33 +18,27 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
+            background-color: #0f172a;
             color: white;
             overflow-x: hidden;
-            background-color: #0f172a; /* Darker slate-900 */
-            
         }
         
-        
-        
-       .hero-image {
-    transition: all 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-}
-.hero-image:hover {
-    transform: translateY(-10px) scale(1.04);
-    box-shadow: 
-        0 0 35px rgba(139, 92, 246, 0.6),
-        0 0 75px rgba(139, 92, 246, 0.25);
-}
+        .hero-image {
+            transition: all 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+        .hero-image:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 
+                0 0 35px rgba(139, 92, 246, 0.6),
+                0 0 75px rgba(139, 92, 246, 0.25);
+        }
         
         .skill-circle {
-    width: 120px;
-    height: 120px;
-    position: relative;
-    transition: all 0.3s ease-in-out;
+            width: 120px;
+            height: 120px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-     
         
         .circle-bg {
             fill: none;
@@ -63,39 +58,31 @@
             transition: stroke-dashoffset 1s ease-out;
         }
         
-       .card {
-    transition: 
-        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 0.45s ease-out,
-        border-color 0.3s ease;
-    transform: translateY(0) scale(1);
-    background-color: #1e293b;
-    border: 1px solid transparent;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    will-change: transform, box-shadow; /* Boosts performance */
-    background-color: #1e293b; /* slate-800 */
-  border: 1px solid #334155; /* slate-700 */
-}
-
-.card:hover {
-    transform: translateY(-7px) scale(1.025);
-    border-color: rgba(139, 92, 246, 0.6);
-    box-shadow: 
-        0 12px 28px -8px rgba(139, 92, 246, 0.35),
-        0 0 35px rgba(139, 92, 246, 0.15);
-};
-
+        .card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            will-change: transform;
+            perspective: 1000px;
+        }
+        
+        .card:hover {
+            transform: translateY(-7px) scale(1.03);
+            box-shadow: 
+                0 15px 30px rgba(139, 92, 246, 0.4),
+                0 0 50px rgba(139, 92, 246, 0.2);
+        }
         
         .btn {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            background-color: var(--primary-dark);
             transform: translateY(-3px) scale(1.02);
+            background-color: var(--primary-dark);
             box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.5);
-            
         }
         
         /* Scroll animations */
@@ -120,31 +107,9 @@
             opacity: 1;
             transform: translate(0);
         }
-
-        .glow-hover {
-    transition: all 0.3s ease-in-out;
-    border: 1px solid #6a0dad;
-    background-color: #1c1c1e;
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: none;
-    transform: translateY(0) scale(1);
-}
-
-.glow-hover:hover {
-    box-shadow: 
-        0 0 10px #6a0dad,
-        0 0 20px #9b30ff,
-        0 0 30px #9b30ff;
-    border-color: #9b30ff;
-    transform: translateY(-5px) scale(1.03);
-}
-
     </style>
 </head>
 <body>
-    
-    
     <header class="min-h-screen flex items-center py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div data-scroll="fade-right">
@@ -173,11 +138,11 @@
         </div>
     </header>
     
-    <section id="skills"  class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-3xl font-bold mb-16 text-center" data-scroll="fade-in">Skills & Expertise</h2>
             
-            <div  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Plugin Configuration -->
                 <div class="card p-8 rounded-xl flex flex-col items-center" data-scroll="fade-in">
                     <div class="skill-circle mb-6">
@@ -227,8 +192,6 @@
                     <p class="text-gray-400 text-center">
                         Expert in staff management with a focus on building efficient teams, enforcing rules, and maintaining a positive server environment.
                     </p>
-                </div>
-
                 </div>
             </div>
         </div>
@@ -358,9 +321,6 @@
                     <h3 class="text-xl font-bold mb-2 text-white">GeyserMC</h3>
                     <p class="text-gray-300">A proxy plugin that allows Bedrock Edition players to join Java Edition servers without any client modifications.</p>
                 </div>
-
-            
-                
             </div>
         </div>
     </section>
@@ -401,21 +361,10 @@
                 </p>
                 <p class="text-sm text-purple-400">Server IP: <span class="font-mono">play.warnetwork.fun</span></p>
             </div>
-            
-            <!-- Add more cards here -->
-            <!-- <div class="card p-8 rounded-xl" data-scroll="fade-left">
-                <h3 class="text-2xl font-bold mb-4">New Server</h3>
-                <p class="text-gray-400 mb-4">
-                    Describe the new server or job description here.
-                </p>
-                <p class="text-sm text-purple-400">Server IP: <span class="font-mono">new.server.ip</span></p> -->
-            </div>
         </div>
     </div>
 </section>
 
-
-    
     <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
         <div class="max-w-md mx-auto text-center" data-scroll="fade-in">
             <h2 class="text-3xl font-bold mb-6">Available for Hire</h2>
@@ -428,7 +377,6 @@
         </div>
     </section>
     
-    
     <footer class="py-12 px-4 bg-gray-950">
         <div class="max-w-7xl mx-auto text-center">
             <p class="text-gray-500">&copy; 2025 Ace Minecraft Development. All rights reserved.</p>
@@ -436,7 +384,20 @@
     </footer>
     
     <script>
-        //  scroll animations
+        // Initialize STRONG 3D tilt effect on all cards
+        document.querySelectorAll('.card').forEach(card => {
+            VanillaTilt.init(card, {
+                max: 15,           // Increased from 8 to 15 for stronger tilt
+                speed: 500,
+                glare: true,
+                "max-glare": 0.2,  // Increased glare intensity
+                perspective: 800,  // Lower perspective for more dramatic effect
+                scale: 1.03,       // Slightly larger scale on hover
+                gyroscope: false   // Disable on mobile for performance
+            });
+        });
+
+        // Scroll animations
         document.addEventListener('DOMContentLoaded', function() {
             const observerOptions = {
                 threshold: 0.1
